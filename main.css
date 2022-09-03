@@ -1,0 +1,62 @@
+body {
+    overflow: hidden; /* Hide scrollbars */
+  }
+
+:root{
+    --bgColor: #111111;
+    --input: #ffffff;
+    --output: #00ffcc;
+    --inpArea: #1d1d1d;
+}
+
+.screansBar .outputScrean{
+    height: 94vh;
+    background-color: var(--bgColor);
+    padding: 20px 30px;
+    overflow-y: scroll;
+}
+
+.screansBar .inputScreen{
+    height: 6vh;
+    width: 100%;
+    background-color: var(--inpArea);
+}
+
+.inputScreen .input{
+    width: 100%;
+    background-color: transparent;
+    color: var(--input);
+    border: 0;
+    resize: vertical;
+    font-size: 14px;
+    min-height: 6vh;
+}
+
+.inputScreen .input::placeholder{
+    color: var(--input);
+    opacity: 0.5;
+}
+
+.inputScreen .input:focus{
+    box-shadow: none;
+}
+
+.code{
+    padding: 3px 10px;
+    height: auto;
+    border: 0;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.code.inputT{
+    color: var(--input)
+}
+
+.code.outputT{
+    color: var(--output)
+}
+
+
+
+
