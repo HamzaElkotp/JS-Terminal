@@ -1,6 +1,10 @@
+html {
+    background-color: var(--inpArea) !important;
+}
+
 body {
     overflow: hidden; /* Hide scrollbars */
-  }
+}
 
 :root{
     --bgColor: #111111;
@@ -30,6 +34,7 @@ body {
     resize: vertical;
     font-size: 14px;
     min-height: 6vh;
+    overflow-y: scroll;
 }
 
 .inputScreen .input::placeholder{
@@ -47,6 +52,10 @@ body {
     border: 0;
     font-size: 14px;
     background-color: transparent;
+    transition: 0.5s;
+}
+.code:hover{
+    background-color: var(--inpArea);
 }
 
 .code.inputT{

@@ -1,6 +1,12 @@
 let outScreen = window.OutScreen;
 let codeInp = document.getElementById("CMinput");
 
+console.oldLog = console.log;
+console.log = function(value){
+    console.oldLog(value);
+    return value;
+};
+
 function newInput(code){
     let inputT = document.createElement("p");
     inputT.classList.add("code","inputT");
