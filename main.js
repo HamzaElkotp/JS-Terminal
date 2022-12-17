@@ -19,10 +19,9 @@ function newOutput(code){
     outPutT.classList.add("code","outputT")
     try{
         outPutT.textContent = eval(code); 
-    }
-        
-    catch(err){
+    }catch(err){
         outPutT.textContent = `${code, err}`;
+        outPutT.classList.add("err")
     }
     outScreen.append(outPutT);
 }

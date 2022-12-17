@@ -10,6 +10,7 @@ body {
     --bgColor: #111111;
     --input: #ffffff;
     --output: #00ffcc;
+    --err: #ff0040;
     --inpArea: #1d1d1d;
 }
 
@@ -66,6 +67,9 @@ body {
     color: var(--output)
 }
 
+.code.outputT{
+    color: var(--err)
+}
 
 
 
