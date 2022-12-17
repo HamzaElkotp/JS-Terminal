@@ -1,9 +1,12 @@
 html {
     background-color: var(--inpArea) !important;
+    overflow-y: auto;
 }
 
 body {
     overflow: hidden; /* Hide scrollbars */
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    display: flex;
 }
 
 :root{
@@ -15,14 +18,17 @@ body {
 }
 
 .screansBar .outputScrean{
-    height: 94vh;
+    height: calc(83vh - 5px);
     background-color: var(--bgColor);
     padding: 20px 30px;
     overflow-y: scroll;
 }
 
+.screansBar{
+    width: calc(100% - 66px);
+}
+
 .screansBar .inputScreen{
-    height: 6vh;
     width: 100%;
     background-color: var(--inpArea);
 }
@@ -34,8 +40,10 @@ body {
     border: 0;
     resize: vertical;
     font-size: 14px;
-    min-height: 6vh;
+    min-height: 10vh;
     overflow-y: scroll;
+    padding-top: 5px;
+    transition: border 5.5s
 }
 
 .inputScreen .input::placeholder{
@@ -43,9 +51,12 @@ body {
     opacity: 0.5;
 }
 
-.inputScreen .input:focus{
+.inputScreen .input:focus {
     box-shadow: none;
+    outline: none;
+    border-top: 1px solid var(--output);
 }
+
 
 .code{
     padding: 3px 10px;
@@ -71,5 +82,66 @@ body {
     color: var(--err)
 }
 
-
+.bar{
+    width: 66px;
+    height: 100vh;
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+.bar .boxes{
+    border-radius: 5px;
+    width: 46px;
+    height: 46px;
+    background-color: #111111;
+    border: 2px solid #111111;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.colorsPanle {
+    width: 180px;
+    position: absolute;
+    top: 10px;
+    right: 75px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    padding: 0 10px 10px;
+    border: 2px solid #007258;
+}
+.colorsPanle .hide{
+    display: none
+}
+.colorsPanle p {
+    margin-top: 6px;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+.colorsPanle input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    height: 20px;
+    outline: none;
+}
+.colorsPanle button {
+    width: 100%;
+    margin-top: 8px;
+    color: #fff;
+    padding: 6px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none !important;
+    border: 0;
+}
+.colorsPanle #save {
+    background-color: hsl(171, 97%, 36%);
+}
+.colorsPanle #apply {
+    background-color: hsl(141, 71%, 48%);
+}
+.colorsPanle #down {
+    background-color: hsl(204, 86%, 53%);
+}
+.colorsPanle #del {
+    background-color: hsl(348, 89%, 52%);
+}
 

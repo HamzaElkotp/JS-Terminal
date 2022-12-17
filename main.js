@@ -12,6 +12,7 @@ function newInput(code){
     inputT.classList.add("code","inputT");
     inputT.textContent = `> ${code}`;
     outScreen.append(inputT);
+    newOutput(code);
 }
 
 function newOutput(code){
@@ -29,7 +30,6 @@ function newOutput(code){
 function factory(){
     let code = document.getElementById("CMinput").value;
     newInput(code);
-    newOutput(code);
 }
 
 codeInp.addEventListener("keydown",function(e){
@@ -37,7 +37,6 @@ codeInp.addEventListener("keydown",function(e){
         factory()
         codeInp.value = ""
     }
-    
 })
 
 
