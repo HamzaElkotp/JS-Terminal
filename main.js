@@ -53,6 +53,8 @@ class Style{
 
 
 let root = document.querySelector(':root');
+let boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'));
+let Aboxes = document.querySelector('.Aboxes');
 
 function applyStyle(inx){
     root.style.setProperty('--bgColor', JSON.parse(localStorage.styles)[inx].TbgC);
@@ -111,13 +113,23 @@ function downFun(){
     let vals = valgetter();
     let data = JSON.stringify(vals);
     let file = new Blob([data],{type:"txt"});
-    console.log(file);
     let a = document.createElement("a"), url = URL.createObjectURL(file);
     a.href = url;
     a.classList.add("hide")
     a.download = file;
     document.body.appendChild(a);
     a.click()
+}
+
+function delFun(e){
+    let index = e.textContent - 1;
+    let arr = JSON.parse(localStorage.styles);
+    arr.splice(index,1)
+    boxes.splice(index,1)
+    localStorage.setItem('styles',JSON.stringify(arr));
+    localStorage.style = 0;
+    e.remove();
+    cp.classList.add('hide');
 }
 
 function cpevent(){
@@ -128,24 +140,27 @@ function cpevent(){
     save.addEventListener('click',()=>{return saveFun(this)});
     let down = document.getElementById("down");
     down.addEventListener('click',downFun);
-    // let del = document.getElementById("del");
-    // del.addEventListener('click',delFun);
+    let del = document.getElementById("del");
+    del.addEventListener('click',()=>{
+        return delFun(this)
+    });
 }
 
 
-
-let boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'));
 
 let addBox = document.querySelector('.add.boxes');
 addBox.addEventListener('click', function(){
     if(boxes.length < 3){
         let newBox = `<div class="boxes">${boxes.length + 1}</div>`;
-        document.querySelector('.Aboxes').innerHTML += newBox;
-        boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'))
-        boxes[boxes.length - 1].addEventListener('click',cpevent)
-        boxes[boxes.length - 1].click()
+        Aboxes.innerHTML += newBox;
+        boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'));
+        boxes[boxes.length - 1].addEventListener('click',cpevent);
+        boxes[boxes.length - 1].click();
+        let stylist = JSON.parse(localStorage.styles);
+        stylist.push("");
+        localStorage.styles = JSON.stringify(stylist);
     }
     if(boxes.length == 3){
-        addBox.remove() 
+        addBox.remove();
     }
 })
