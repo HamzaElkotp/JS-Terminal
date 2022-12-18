@@ -96,12 +96,23 @@ function applyFun(){
     root.style.setProperty('--ere',vals.ErC);
 }
 
+function saveFun(e){
+    let vals = valgetter();
+    let newObj = new Style(vals.TbgC,vals.IbgC,vals.InC,vals.OuC,vals.ErC);
+    let arr = JSON.parse(localStorage.styles);
+    let index = e.textContent - 1;
+    arr[index]=newObj;
+    localStorage.setItem('styles',JSON.stringify(arr));
+    localStorage.style = index;
+    applyFun()
+}
+
 function cpevent(){
     cp.classList.toggle('hide');
     let apply = document.getElementById("apply");
     apply.addEventListener('click',applyFun);
-    // let save = document.getElementById("save");
-    // save.addEventListener('click',saveFun);
+    let save = document.getElementById("save");
+    save.addEventListener('click',()=>{return saveFun(this)});
     // let down = document.getElementById("down");
     // down.addEventListener('click',downFun);
     // let del = document.getElementById("del");
