@@ -76,4 +76,18 @@ window.addEventListener('load',function(){
 
 
 
+let boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'));
 
+let addBox = document.querySelector('.add.boxes');
+addBox.addEventListener('click', function(){
+    if(boxes.length < 3){
+        let newBox = `<div class="boxes">${boxes.length + 1}</div>`;
+        document.querySelector('.Aboxes').innerHTML += newBox;
+        boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'))
+        boxes[boxes.length - 1].addEventListener('click',cpevent(ele))
+        boxes[boxes.length - 1].click()
+    }
+    if(boxes.length == 3){
+        addBox.remove() 
+    }
+})
