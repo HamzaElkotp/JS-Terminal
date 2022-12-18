@@ -40,6 +40,39 @@ codeInp.addEventListener("keydown",function(e){
 })
 
 
+class Style{
+    constructor(TbgC,IbgC,InC,OuC,ErC){
+        this.TbgC = TbgC;
+        this.IbgC = IbgC;
+        this.InC = InC;
+        this.OuC = OuC;
+        this.ErC = ErC;
+    }
+
+}
+
+
+let root = document.querySelector(':root');
+
+function applyStyle(inx){
+    root.style.setProperty('--bgColor', JSON.parse(localStorage.styles)[inx].TbgC);
+    root.style.setProperty('--inpArea', JSON.parse(localStorage.styles)[inx].IbgC);
+    root.style.setProperty('--input', JSON.parse(localStorage.styles)[inx].InC);
+    root.style.setProperty('--output', JSON.parse(localStorage.styles)[inx].OuC);
+    root.style.setProperty('--err', JSON.parse(localStorage.styles)[inx].ErC);
+}
+
+
+window.addEventListener('load',function(){
+    if(localStorage.style == undefined){
+        let styles = [new Style("#111","#1d1d1d","#fff","#00ffcc","#ff0040")];
+        localStorage.setItem("styles", JSON.stringify(styles));
+        localStorage.style = 0;
+        applyStyle(0);
+    }else{
+        applyStyle(localStorage.style);
+    }
+})
 
 
 

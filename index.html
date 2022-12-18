@@ -6,7 +6,6 @@
     <title>JS Terminal</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -24,15 +23,15 @@
         <div class="colorsPanle">
             <div class="colors">
                 <p>Terminal bg color</p>
-                <input type="color" name="TbgC" id="">
+                <input type="color" name="TbgC" id="TbgC">
                 <p>Input box bg color</p>
-                <input type="color" name="IbgC" id="">
+                <input type="color" name="IbgC" id="IbgC">
                 <p>Input color</p>
-                <input type="color" name="InC" id="">
+                <input type="color" name="InC" id="InC">
                 <p>Output color</p>
-                <input type="color" name="OuC" id="">
+                <input type="color" name="OuC" id="OuC">
                 <p>Error color</p>
-                <input type="color" name="ErC" id="">
+                <input type="color" name="ErC" id="ErC">
             </div>
             <div class="buttons">
                 <button id="save">Save</button>
@@ -41,9 +40,11 @@
                 <button id="del">Delete</button>
             </div>
         </div>
-        <div class="boxes">
-            
+        <div class="Aboxes">
+            <div class="boxes">1</div>
         </div>
+        <div class="add boxes"><i class="fa-regular fa-square-plus"></i></div>
+        <button id="CDown">Download Code</button>
     </div>
 </body>
 </html>
