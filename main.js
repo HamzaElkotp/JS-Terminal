@@ -107,14 +107,27 @@ function saveFun(e){
     applyFun()
 }
 
+function downFun(){
+    let vals = valgetter();
+    let data = JSON.stringify(vals);
+    let file = new Blob([data],{type:"txt"});
+    console.log(file);
+    let a = document.createElement("a"), url = URL.createObjectURL(file);
+    a.href = url;
+    a.classList.add("hide")
+    a.download = file;
+    document.body.appendChild(a);
+    a.click()
+}
+
 function cpevent(){
     cp.classList.toggle('hide');
     let apply = document.getElementById("apply");
     apply.addEventListener('click',applyFun);
     let save = document.getElementById("save");
     save.addEventListener('click',()=>{return saveFun(this)});
-    // let down = document.getElementById("down");
-    // down.addEventListener('click',downFun);
+    let down = document.getElementById("down");
+    down.addEventListener('click',downFun);
     // let del = document.getElementById("del");
     // del.addEventListener('click',delFun);
 }
