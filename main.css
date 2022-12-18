@@ -133,8 +133,8 @@ body {
     padding: 0 10px 10px;
     border: 2px solid #007258;
 }
-.colorsPanle .hide{
-    display: none
+.colorsPanle.hide{
+    display: none;
 }
 .colorsPanle p {
     margin-top: 6px;

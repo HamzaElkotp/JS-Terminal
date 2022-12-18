@@ -75,6 +75,40 @@ window.addEventListener('load',function(){
 })
 
 
+let cp = document.querySelector('.colorsPanle');
+
+function valgetter(){
+    return new Style(
+        document.getElementById("TbgC").value,
+        document.getElementById("IbgC").value,
+        document.getElementById("InC").value,
+        document.getElementById("OuC").value,
+        document.getElementById("ErC").value
+    )
+}
+
+function applyFun(){
+    let vals = valgetter()
+    root.style.setProperty('--bgColor',vals.TbgC);
+    root.style.setProperty('--inpArea',vals.IbgC);
+    root.style.setProperty('--input',vals.InC);
+    root.style.setProperty('--output',vals.OuC);
+    root.style.setProperty('--ere',vals.ErC);
+}
+
+function cpevent(){
+    cp.classList.toggle('hide');
+    let apply = document.getElementById("apply");
+    apply.addEventListener('click',applyFun);
+    // let save = document.getElementById("save");
+    // save.addEventListener('click',saveFun);
+    // let down = document.getElementById("down");
+    // down.addEventListener('click',downFun);
+    // let del = document.getElementById("del");
+    // del.addEventListener('click',delFun);
+}
+
+
 
 let boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'));
 
@@ -84,7 +118,7 @@ addBox.addEventListener('click', function(){
         let newBox = `<div class="boxes">${boxes.length + 1}</div>`;
         document.querySelector('.Aboxes').innerHTML += newBox;
         boxes = Array.from(document.querySelectorAll('.Aboxes .boxes'))
-        boxes[boxes.length - 1].addEventListener('click',cpevent(ele))
+        boxes[boxes.length - 1].addEventListener('click',cpevent)
         boxes[boxes.length - 1].click()
     }
     if(boxes.length == 3){
