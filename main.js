@@ -55,11 +55,6 @@ class Style{
 
 }
 
-
-let root = document.querySelector(':root');
-let boxes = [...document.querySelectorAll('.Aboxes .boxes')];
-let Aboxes = document.querySelector('.Aboxes');
-
 function applyStyle(inx){
     root.style.setProperty('--bgColor', JSON.parse(localStorage.styles)[inx].TbgC);
     root.style.setProperty('--inpArea', JSON.parse(localStorage.styles)[inx].IbgC);
@@ -69,9 +64,23 @@ function applyStyle(inx){
 }
 
 
-let cp = document.querySelector('.colorsPanle');
+let root = document.querySelector(':root');
+let boxes = [...document.querySelectorAll('.Aboxes .boxes')];
+let Aboxes = document.querySelector('.Aboxes');
 
-function valgetter(){
+
+
+
+let cp = document.querySelector('.colorsPanle');
+let styleNumber = 0; // the style index to can select it easy in the Sh*ty LocalStorge
+
+function cpevent(index){
+    cp.classList.toggle('hide');
+    styleNumber = index - 1;
+    console.log(styleNumber)
+}
+
+function valgetter(){ // take the values from every color input to object
     return new Style(
         document.getElementById("TbgC").value,
         document.getElementById("IbgC").value,
@@ -81,42 +90,49 @@ function valgetter(){
     )
 }
 
-function applyFun(){
+
+let apply = document.getElementById("apply");
+function applyFun(){ // apply style when click apply
     let vals = valgetter()
     root.style.setProperty('--bgColor',vals.TbgC);
     root.style.setProperty('--inpArea',vals.IbgC);
     root.style.setProperty('--input',vals.InC);
     root.style.setProperty('--output',vals.OuC);
     root.style.setProperty('--ere',vals.ErC);
+    return vals
 }
+apply.addEventListener('click',applyFun);
 
-function saveFun(e){
-    console.log(e)
-    let vals = valgetter();
-    let newObj = new Style(vals.TbgC, vals.IbgC, vals.InC, vals.OuC, vals.ErC);
+
+let save = document.getElementById("save");
+function saveFun(){ // save new colors to localstorage
+    let newObj = applyFun()
     let arr = JSON.parse(localStorage.styles);
-    let index = e - 1;
-    console.log(`### ${JSON.stringify(arr[index])}`)
-    arr[index]=newObj;
-    console.log(`*** ${JSON.stringify(arr[index])}`)
+    arr[styleNumber]=newObj;
     localStorage.setItem('styles',JSON.stringify(arr));
-    localStorage.style = index;
-    // applyFun()
+    localStorage.style = styleNumber;
 }
+save.addEventListener('click',saveFun);
 
-// function downFun(){
-//     let vals = valgetter();
-//     let data = JSON.stringify(vals);
-//     let file = new Blob([data],{type:"txt"});
-//     let a = document.createElement("a"), url = URL.createObjectURL(file);
-//     a.href = url;
-//     a.classList.add("hide")
-//     a.download = file;
-//     document.body.appendChild(a);
-//     a.click()
-// }
 
-// function delFun(e){
+let down = document.getElementById("down");
+function downFun(){
+    let vals = valgetter();
+    let data = JSON.stringify(vals);
+    let file = new Blob([data],{type:"text"});
+    let a = document.createElement("a"), url = URL.createObjectURL(file);
+    a.href = url;
+    a.classList.add("hide")
+    a.download = file;
+    document.body.appendChild(a);
+    a.click()
+    a.remove()
+}
+down.addEventListener('click',downFun);
+
+
+// let del = document.getElementById("del");
+// function delFun(){
 //     let arr = JSON.parse(localStorage.styles);
 //     arr.splice(e,1)
 //     boxes.splice(e,1)
@@ -125,29 +141,10 @@ function saveFun(e){
 //     boxes[e].remove();
 //     cp.classList.remove('hide');
 // }
+// del.addEventListener('click',delFun);
 
-let styleNumber = 0;
-function cpevent(index){
-    cp.classList.toggle('hide');
-    styleNumber = index - 1;
-    console.log(styleNumber)
 
-    // let apply = document.getElementById("apply");
-    // apply.addEventListener('click',applyFun);
 
-    // let save = document.getElementById("save");
-    // save.addEventListener('click',()=>{
-    //     return saveFun(index)
-    // });
-
-    // let down = document.getElementById("down");
-    // down.addEventListener('click',downFun);
-
-    // let del = document.getElementById("del");
-    // del.addEventListener('click',()=>{
-    //     return delFun(index)
-    // });
-}
 
 
 
@@ -160,13 +157,7 @@ addBox.addEventListener('click', function(){
         Aboxes.appendChild(newBox);
 
         addevent(newBox)
-        // newBox.addEventListener('click',(e)=>{
-        //     console.log(e)
-        //     console.log(e.target)
-        //     console.log(e.target.textContent)
-        // })
-        // addTable();
-        // boxes[boxes.length - 1].click();
+        newBox.click();
         let stylist = JSON.parse(localStorage.styles);
         stylist.push("");
         localStorage.styles = JSON.stringify(stylist);
