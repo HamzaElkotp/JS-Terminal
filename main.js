@@ -123,36 +123,43 @@ function valgetter(){
 //     cp.classList.remove('hide');
 // }
 
-// function cpevent(index){
-//     cp.classList.toggle('hide');
-//     let apply = document.getElementById("apply");
-//     apply.addEventListener('click',applyFun);
+function cpevent(index){
+    cp.classList.toggle('hide');
+    let apply = document.getElementById("apply");
+    apply.addEventListener('click',applyFun);
 
-//     let save = document.getElementById("save");
-//     save.addEventListener('click',()=>{
-//         return saveFun(index)
-//     });
+    let save = document.getElementById("save");
+    save.addEventListener('click',()=>{
+        return saveFun(index)
+    });
 
-//     let down = document.getElementById("down");
-//     down.addEventListener('click',downFun);
+    let down = document.getElementById("down");
+    down.addEventListener('click',downFun);
 
-//     let del = document.getElementById("del");
-//     del.addEventListener('click',()=>{
-//         return delFun(index)
-//     });
-// }
+    let del = document.getElementById("del");
+    del.addEventListener('click',()=>{
+        return delFun(index)
+    });
+}
 
 
 
 let addBox = document.querySelector('.add.boxes');
 addBox.addEventListener('click', function(){
     if(boxes.length < 3){
-        boxes = [...document.querySelectorAll('.Aboxes .boxes')];
-        let newBox = `<div class="boxes">${boxes.length + 1}</div>`;
-        Aboxes.innerHTML += newBox;
+        let newBox = document.createElement('div');
+        newBox.classList.add("boxes");
+        newBox.textContent = boxes.length+1;
+        Aboxes.appendChild(newBox);
 
+        addevent(newBox)
+        // newBox.addEventListener('click',(e)=>{
+        //     console.log(e)
+        //     console.log(e.target)
+        //     console.log(e.target.textContent)
+        // })
         // addTable();
-        boxes[boxes.length - 1].click();
+        // boxes[boxes.length - 1].click();
         let stylist = JSON.parse(localStorage.styles);
         stylist.push("");
         localStorage.styles = JSON.stringify(stylist);
@@ -160,6 +167,7 @@ addBox.addEventListener('click', function(){
     if(boxes.length >= 2){
         addBox.remove();
     }
+    boxes = [...document.querySelectorAll('.Aboxes .boxes')]
 });
 
 
@@ -176,9 +184,11 @@ function addTable(){
 function localStyleDom(){
     let styles = JSON.parse(localStorage.styles);
     for(let i=0;i<styles.length;i++){
-        let newBox = `<div class="boxes">${i+1}</div>`;
-        Aboxes.innerHTML += newBox;
-        // addTable();
+        let newBox = document.createElement('div');
+        newBox.classList.add("boxes");
+        newBox.textContent = i+1
+        Aboxes.appendChild(newBox);
+        addevent(newBox)
     }
 }
 
@@ -202,4 +212,13 @@ window.addEventListener('load',function(){
     if(boxes.length == 3){
         addBox.remove();
     }
+
 })
+
+function addevent(ele){
+    ele.addEventListener("click", function(e){
+        let indx = +e.target.textContent;
+        console.log(indx);
+        cpevent(indx)
+    })
+}
