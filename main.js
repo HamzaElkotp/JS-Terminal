@@ -81,25 +81,28 @@ function valgetter(){
     )
 }
 
-// function applyFun(){
-//     let vals = valgetter()
-//     root.style.setProperty('--bgColor',vals.TbgC);
-//     root.style.setProperty('--inpArea',vals.IbgC);
-//     root.style.setProperty('--input',vals.InC);
-//     root.style.setProperty('--output',vals.OuC);
-//     root.style.setProperty('--ere',vals.ErC);
-// }
+function applyFun(){
+    let vals = valgetter()
+    root.style.setProperty('--bgColor',vals.TbgC);
+    root.style.setProperty('--inpArea',vals.IbgC);
+    root.style.setProperty('--input',vals.InC);
+    root.style.setProperty('--output',vals.OuC);
+    root.style.setProperty('--ere',vals.ErC);
+}
 
-// function saveFun(e){
-//     let vals = valgetter();
-//     let newObj = new Style(vals.TbgC,vals.IbgC,vals.InC,vals.OuC,vals.ErC);
-//     let arr = JSON.parse(localStorage.styles);
-//     let index = e.textContent - 1;
-//     arr[index]=newObj;
-//     localStorage.setItem('styles',JSON.stringify(arr));
-//     localStorage.style = index;
-//     applyFun()
-// }
+function saveFun(e){
+    console.log(e)
+    let vals = valgetter();
+    let newObj = new Style(vals.TbgC, vals.IbgC, vals.InC, vals.OuC, vals.ErC);
+    let arr = JSON.parse(localStorage.styles);
+    let index = e - 1;
+    console.log(`### ${JSON.stringify(arr[index])}`)
+    arr[index]=newObj;
+    console.log(`*** ${JSON.stringify(arr[index])}`)
+    localStorage.setItem('styles',JSON.stringify(arr));
+    localStorage.style = index;
+    // applyFun()
+}
 
 // function downFun(){
 //     let vals = valgetter();
@@ -123,23 +126,27 @@ function valgetter(){
 //     cp.classList.remove('hide');
 // }
 
+let styleNumber = 0;
 function cpevent(index){
     cp.classList.toggle('hide');
-    let apply = document.getElementById("apply");
-    apply.addEventListener('click',applyFun);
+    styleNumber = index - 1;
+    console.log(styleNumber)
 
-    let save = document.getElementById("save");
-    save.addEventListener('click',()=>{
-        return saveFun(index)
-    });
+    // let apply = document.getElementById("apply");
+    // apply.addEventListener('click',applyFun);
 
-    let down = document.getElementById("down");
-    down.addEventListener('click',downFun);
+    // let save = document.getElementById("save");
+    // save.addEventListener('click',()=>{
+    //     return saveFun(index)
+    // });
 
-    let del = document.getElementById("del");
-    del.addEventListener('click',()=>{
-        return delFun(index)
-    });
+    // let down = document.getElementById("down");
+    // down.addEventListener('click',downFun);
+
+    // let del = document.getElementById("del");
+    // del.addEventListener('click',()=>{
+    //     return delFun(index)
+    // });
 }
 
 
@@ -171,15 +178,15 @@ addBox.addEventListener('click', function(){
 });
 
 
-function addTable(){
-    boxes = [...document.querySelectorAll('.Aboxes .boxes')];
-    // boxes.forEach((elo,i)=>{
-    //     elo.removeEventListener('click',function(){cpevent(i)})
-    //     elo.addEventListener('click',function(){
-    //         cpevent(i)
-    //     })
-    // })
-}
+// function addTable(){
+//     boxes = [...document.querySelectorAll('.Aboxes .boxes')];
+//     // boxes.forEach((elo,i)=>{
+//     //     elo.removeEventListener('click',function(){cpevent(i)})
+//     //     elo.addEventListener('click',function(){
+//     //         cpevent(i)
+//     //     })
+//     // })
+// }
 
 function localStyleDom(){
     let styles = JSON.parse(localStorage.styles);
@@ -218,7 +225,6 @@ window.addEventListener('load',function(){
 function addevent(ele){
     ele.addEventListener("click", function(e){
         let indx = +e.target.textContent;
-        console.log(indx);
         cpevent(indx)
     })
 }
