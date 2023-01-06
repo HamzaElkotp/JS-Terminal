@@ -138,14 +138,14 @@ body {
 }
 .colorsPanle p {
     margin-top: 6px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     font-size: 15px;
 }
 .colorsPanle input {
     width: 100%;
     padding: 0;
     border: none;
-    height: 20px;
+    height: 16px;
     outline: none;
 }
 .colorsPanle button {
@@ -171,3 +171,6 @@ body {
     background-color: hsl(348, 89%, 52%);
 }
 
+hr{
+    margin-bottom: 0;
+}

@@ -89,8 +89,7 @@ function valgetter(){ // take the values from every color input to object
         document.getElementById("ErC").value
     )
 }
-
-function valgetterByIndex(inx){ // take the values of color by index from local storage
+function styleGettByIndex(inx){ // take the values of color by index from local storage
     let val = JSON.parse(localStorage.styles)[inx];
     return val
 }
@@ -98,7 +97,6 @@ function styleApplyByIndex(indx){ // apply style using its index
     localStorage.style = indx;
     applyStyle(indx);
 }
-
 
 
 let apply = document.getElementById("apply");
@@ -116,18 +114,18 @@ apply.addEventListener('click',applyFun);
 
 let save = document.getElementById("save");
 function saveFun(){ // save new colors to localstorage
-    let newObj = applyFun()
+    let newObj = valgetter()
     let arr = JSON.parse(localStorage.styles);
     arr[styleNumber]=newObj;
     localStorage.setItem('styles',JSON.stringify(arr));
-    localStorage.style = styleNumber;
+    styleApplyByIndex(styleNumber)
 }
 save.addEventListener('click',saveFun);
 
 
 let down = document.getElementById("down");
 function downFun(){
-    let vals = valgetter();
+    let vals = styleGettByIndex(styleNumber);
     let data = JSON.stringify(vals);
     let file = new Blob([data],{type:"text"});
     let a = document.createElement("a"), url = URL.createObjectURL(file);
@@ -173,7 +171,7 @@ addBox.addEventListener('click', function(){
         let stylist = JSON.parse(localStorage.styles);
         stylist.push(new Style("#111","#1d1d1d","#fff","#00ffcc","#ff0040"));
         localStorage.styles = JSON.stringify(stylist);
-        
+
         newBox.click();
     }
     if(boxes.length >= 2){
@@ -182,16 +180,6 @@ addBox.addEventListener('click', function(){
     boxes = [...document.querySelectorAll('.Aboxes .boxes')]
 });
 
-
-// function addTable(){
-//     boxes = [...document.querySelectorAll('.Aboxes .boxes')];
-//     // boxes.forEach((elo,i)=>{
-//     //     elo.removeEventListener('click',function(){cpevent(i)})
-//     //     elo.addEventListener('click',function(){
-//     //         cpevent(i)
-//     //     })
-//     // })
-// }
 
 function localStyleDom(){
     let styles = JSON.parse(localStorage.styles);
@@ -210,8 +198,7 @@ window.addEventListener('load',function(){
     if(localStorage.styles == "[]" || localStorage.styles == undefined){
         let styles = [new Style("#111","#1d1d1d","#fff","#00ffcc","#ff0040")];
         localStorage.setItem("styles", JSON.stringify(styles));
-        localStorage.style = 0;
-        applyStyle(0);
+        styleApplyByIndex(0);
     }else{
         applyStyle(localStorage.style);
     }
