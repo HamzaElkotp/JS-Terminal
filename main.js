@@ -90,6 +90,16 @@ function valgetter(){ // take the values from every color input to object
     )
 }
 
+function valgetterByIndex(inx){ // take the values of color by index from local storage
+    let val = JSON.parse(localStorage.styles)[inx];
+    return val
+}
+function styleApplyByIndex(indx){ // apply style using its index
+    localStorage.style = indx;
+    applyStyle(indx);
+}
+
+
 
 let apply = document.getElementById("apply");
 function applyFun(){ // apply style when click apply
@@ -131,17 +141,20 @@ function downFun(){
 down.addEventListener('click',downFun);
 
 
-// let del = document.getElementById("del");
-// function delFun(){
-//     let arr = JSON.parse(localStorage.styles);
-//     arr.splice(e,1)
-//     boxes.splice(e,1)
-//     localStorage.setItem('styles',JSON.stringify(arr));
-//     localStorage.style = 0;
-//     boxes[e].remove();
-//     cp.classList.remove('hide');
-// }
-// del.addEventListener('click',delFun);
+let del = document.getElementById("del");
+function delFun(){
+    let arr = JSON.parse(localStorage.styles);
+    arr.splice(styleNumber,1);
+    boxes[styleNumber].remove();
+    boxes.splice(styleNumber,1);
+    localStorage.setItem('styles',JSON.stringify(arr));
+    localStorage.style = 0;
+    cp.classList.add('hide');
+    for(let i=0; i<boxes.length; i++){
+        boxes[i].textContent = i+1
+    }
+}
+del.addEventListener('click',delFun);
 
 
 
@@ -157,10 +170,11 @@ addBox.addEventListener('click', function(){
         Aboxes.appendChild(newBox);
 
         addevent(newBox)
-        newBox.click();
         let stylist = JSON.parse(localStorage.styles);
-        stylist.push("");
+        stylist.push(new Style("#111","#1d1d1d","#fff","#00ffcc","#ff0040"));
         localStorage.styles = JSON.stringify(stylist);
+        
+        newBox.click();
     }
     if(boxes.length >= 2){
         addBox.remove();
@@ -186,14 +200,14 @@ function localStyleDom(){
         newBox.classList.add("boxes");
         newBox.textContent = i+1
         Aboxes.appendChild(newBox);
-        addevent(newBox)
+        addevent(newBox);
     }
 }
 
 
 window.addEventListener('load',function(){
     // Defualt Style
-    if(localStorage.style == undefined){
+    if(localStorage.styles == "[]" || localStorage.styles == undefined){
         let styles = [new Style("#111","#1d1d1d","#fff","#00ffcc","#ff0040")];
         localStorage.setItem("styles", JSON.stringify(styles));
         localStorage.style = 0;
@@ -217,5 +231,6 @@ function addevent(ele){
     ele.addEventListener("click", function(e){
         let indx = +e.target.textContent;
         cpevent(indx)
+        styleApplyByIndex(indx - 1)
     })
 }
