@@ -8,10 +8,14 @@ console.log = function(value){
     return value;
 };
 
+
+let codes = "";
 function newInput(code){
     let inputT = document.createElement("p");
     inputT.classList.add("code","inputT");
     inputT.textContent = `> ${code}`;
+
+    codes += `${code}`+"\n"
 
     let copyB = document.createElement("button");
     copyB.classList.add("button","is-primary");
@@ -176,6 +180,18 @@ function copyFun(e){ // code copy function, using clipboard API
             copyBox.classList.remove("active");
         },4500)
     })
+}
+
+
+function downCode(){
+    let file = new Blob([codes],{type:"js"});
+    let a = document.createElement("a"), url = URL.createObjectURL(file);
+    a.href = url;
+    a.classList.add("hide")
+    a.download = file;
+    document.body.appendChild(a);
+    a.click()
+    a.remove()
 }
 
 

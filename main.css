@@ -78,7 +78,8 @@ body {
 }
 
 .code.outputT{
-    color: var(--output)
+    color: var(--output);
+    padding-bottom: 3px;
 }
 
 .code.outputT.err{
