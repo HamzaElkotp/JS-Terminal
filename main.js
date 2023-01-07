@@ -12,6 +12,15 @@ function newInput(code){
     let inputT = document.createElement("p");
     inputT.classList.add("code","inputT");
     inputT.textContent = `> ${code}`;
+
+    let copyB = document.createElement("button");
+    copyB.classList.add("button","is-primary");
+    copyB.textContent = `copy`;
+    copyB.onclick = function(){
+        copyFun(copyB)
+    }
+
+    inputT.append(copyB);
     outScreen.append(inputT);
     newOutput(code);
 }
@@ -52,7 +61,6 @@ class Style{
         this.OuC = OuC;
         this.ErC = ErC;
     }
-
 }
 
 function applyStyle(inx){
@@ -72,12 +80,12 @@ let Aboxes = document.querySelector('.Aboxes');
 
 
 let cp = document.querySelector('.colorsPanle');
-let styleNumber = 0; // the style index to can select it easy in the Sh*ty LocalStorge
+let styleNumber = 0; // the style index to can select it easy in the  LocalStorge
 
 function cpevent(index){
     cp.classList.toggle('hide');
     styleNumber = index - 1;
-    console.log(styleNumber)
+    // console.log(styleNumber)
 }
 
 function valgetter(){ // take the values from every color input to object
@@ -154,6 +162,21 @@ function delFun(){
 }
 del.addEventListener('click',delFun);
 
+
+let copyBox = document.querySelector(".copy");
+function copyFun(e){ // code copy function, using clipboard API
+    let code = e.previousSibling.textContent;
+    navigator.clipboard
+    .writeText(code.replace("> ",""))
+    .then(()=>{
+        copyBox.classList.add("active");
+    })
+    .then(()=>{
+        setTimeout(()=>{
+            copyBox.classList.remove("active");
+        },4500)
+    })
+}
 
 
 
