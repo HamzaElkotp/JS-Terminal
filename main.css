@@ -252,3 +252,20 @@ element ~ div{
     text-decoration: none;
     font-size: 15px;
 }
+.social {
+    text-align: center;
+    margin-top: 10px;
+    background-color: var(--inpArea);
+    padding: 6px 12.1px 8px;
+    border-radius: 5px;
+    border: 2px solid var(--input);
+    width: 24px;
+    font-size: 30px;
+}
+.social a{
+    color: var(--input);
+    margin: 0;
+    margin-left: 0px;
+    padding: 5px;
+    margin-left: -7.5px;
+}
