@@ -139,16 +139,19 @@ let down = document.getElementById("down");
 function downFun(){
     let vals = styleGettByIndex(styleNumber);
     let data = JSON.stringify(vals);
-    let file = new Blob([data],{type:"text"});
-    let a = document.createElement("a"), url = URL.createObjectURL(file);
+    let file = new File([data], "colorCode.txt", {type:"text/txt"});
+    let url = URL.createObjectURL(file);
+
+    let a = document.createElement("a"); 
     a.href = url;
-    a.classList.add("hide")
-    a.download = file;
+    a.download = `${file.name}.txt`;
+
     document.body.appendChild(a);
-    a.click()
-    a.remove()
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
 }
-down.addEventListener('click',downFun);
+down.addEventListener('click', downFun);
 
 
 let del = document.getElementById("del");
@@ -184,14 +187,17 @@ function copyFun(e){ // code copy function, using clipboard API
 
 
 function downCode(){
-    let file = new Blob([codes],{type:"js"});
-    let a = document.createElement("a"), url = URL.createObjectURL(file);
+    let file = new File([codes], "jsCode.js", {type:"text/js"});
+    let url = URL.createObjectURL(file);
+
+    let a = document.createElement("a");
     a.href = url;
-    a.classList.add("hide")
-    a.download = file;
+    a.download = `${file.name}.js`;
+
     document.body.appendChild(a);
-    a.click()
-    a.remove()
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
 }
 
 
